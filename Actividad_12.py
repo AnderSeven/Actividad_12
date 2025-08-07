@@ -18,9 +18,18 @@ def ingreso_datos():
                 print("El nombre ya esta en uso, ingrese otro")
             else:
                 s = True
-        cantidad = int(input("Ingrese la cantidad de paquetes entregados: "))
+        s = False
+        while s == False:
+            cantidad = int(input("Ingrese la cantidad de paquetes entregados: "))
+            if cantidad >= 0:
+                s = True
+            else:
+                print("La cantidad debe de ser un numero entero positivo")
         zona = input("Zona del empleado: ")
-        mensajeria[nombre] = cantidad, zona
+        mensajeria[nombre] = {
+            cantidad: "cantidad",
+            zona: "zona"
+        }
 
 opciones = 0
 a = False
@@ -36,8 +45,17 @@ while a == False:
         case 1:
             ingreso_datos()
         case 2:
+            if len(mensajeria) > 0:
+                orden = quick_sort(list(mensajeria.keys()))
+                print("---Ranking de Empleados---")
+                for nombre in orden:
+                    print(f"Nombre: {nombre}, Paquetes: {mensajeria[nombre]}, Zona: {mensajeria[nombre]}")
+            else:
+                print("No hay ningun empleado registrado")
         case 3:
+            print("asdf")
         case 4:
+            print("adsf")
         case 5:
             print("Gracias por usar el sistema")
         case _:
