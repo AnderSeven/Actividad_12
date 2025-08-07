@@ -1,12 +1,18 @@
-mesajeria = {}
+mensajeria = {}
 
 def ingreso_datos():
     c = int(input("Cuantos empleados desea registrar: "))
     for i in range(c):
-        nombre = input("Ingrese el nombre: ")
+        s = False
+        while s == False:
+            nombre = input("Ingrese el nombre: ")
+            if nombre in mensajeria:
+                print("El nombre ya esta en uso, ingrese otro")
+            else:
+                s = True
         cantidad = int(input("Ingrese la cantidad de paquetes entregados: "))
         zona = input("Zona del empleado: ")
-
+        mensajeria[nombre] = cantidad, zona
 
 opciones = 0
 a = False
