@@ -31,6 +31,13 @@ def ingreso_datos():
             "zona": zona
         }
 
+def busqueda_secuencial(diccionario, objetivo):
+    lista_nombres = list(diccionario.keys())
+    for i in range(len(lista_nombres)):
+        if lista_nombres[i].lower() == objetivo.lower():
+            return i
+    return -1
+
 opciones = 0
 a = False
 while a == False:
@@ -53,10 +60,20 @@ while a == False:
             else:
                 print("No hay ningun empleado registrado")
         case 3:
-            print("asdf")
+            if len(mensajeria) > 0:
+                buscado = input("Ingrese el nombre que desea buscar: ")
+                indice = busqueda_secuencial(mensajeria, buscado)
+                if indice != -1:
+                    nombre = list(mensajeria.keys())[indice]
+                    print(f"{nombre} entrego {mensajeria[nombre]['paquetes']} paquetes en la zona {mensajeria[nombre]['zona']}")
+                else:
+                    print("No hay ningun empleado con ese nombre")
+            else:
+                print("No hay empleados registrados")
         case 4:
             print("adsf")
         case 5:
             print("Gracias por usar el sistema")
+            a = True
         case _:
             print("Opcion invalida")
