@@ -71,7 +71,30 @@ while a == False:
             else:
                 print("No hay empleados registrados")
         case 4:
-            print("adsf")
+            if len(mensajeria) > 0:
+                total = sum(datos["paquetes"] for datos in mensajeria.values())
+                promedio = total / len(mensajeria)
+
+                max_paquetes = max(datos['paquetes'] for datos in mensajeria.values())
+                min_paquetes = min(datos['paquetes'] for datos in mensajeria.values())
+
+                mas_entregas = [nombre for nombre, datos in mensajeria.items() if datos["paquetes"] == max_paquetes]
+                menos_entregas = [nombre for nombre, datos in mensajeria.items() if datos["paquetes"] == min_paquetes]
+
+                print("---Estadisticas---")
+                print(f"Total de paquetes entregados: {total}")
+                print(f"Promedio de entregas: {promedio:.2f}")
+                print(f"Mayor numero de entregas ({max_paquetes} paquetes):")
+                for nombre, datos in mensajeria.items():
+                    if datos["paquetes"] == max_paquetes:
+                        print(f" - {nombre}")
+
+                print(f"Menor numero de entregas ({min_paquetes} paquetes):")
+                for nombre, datos in mensajeria.items():
+                    if datos["paquetes"] == min_paquetes:
+                        print(f" - {nombre}")
+            else:
+                print("No hay empleados registrados")
         case 5:
             print("Gracias por usar el sistema")
             a = True
