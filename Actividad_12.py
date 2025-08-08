@@ -2,9 +2,9 @@ def quick_sort(lista):
     if len(lista) <= 1:
         return lista
     pivote = lista[0]
-    menores = [x for x in lista[1:] if x < pivote]
-    iguales = [x for x in lista if x == pivote]
-    mayores = [x for x in lista[1:] if x > pivote]
+    mayores = [x for x in lista[1:] if x[1] > pivote[1]]
+    iguales = [x for x in lista if x[1] == pivote[1]]
+    menores = [x for x in lista[1:] if x[1] < pivote[1]]
     return quick_sort(mayores) + iguales + quick_sort(menores)
 mensajeria = {}
 
@@ -27,8 +27,8 @@ def ingreso_datos():
                 print("La cantidad debe de ser un numero entero positivo")
         zona = input("Zona del empleado: ")
         mensajeria[nombre] = {
-            cantidad: "cantidad",
-            zona: "zona"
+            "paquetes": cantidad,
+            "zona": zona
         }
 
 opciones = 0
@@ -46,10 +46,10 @@ while a == False:
             ingreso_datos()
         case 2:
             if len(mensajeria) > 0:
-                orden = quick_sort(list(mensajeria.keys()))
+                orden = quick_sort([(nombre, datos["paquetes"], datos["zona"]) for nombre, datos in mensajeria.items()])
                 print("---Ranking de Empleados---")
-                for nombre in orden:
-                    print(f"Nombre: {nombre}, Paquetes: {mensajeria[nombre]}, Zona: {mensajeria[nombre]}")
+                for nombre, paquetes, zona in orden:
+                    print(f"{nombre} - {paquetes} paquetes - Zona: {zona}")
             else:
                 print("No hay ningun empleado registrado")
         case 3:
